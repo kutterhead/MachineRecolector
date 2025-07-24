@@ -27,7 +27,7 @@ public class MachineController : MonoBehaviour
         float valorV = slideVertical.value;
         float valorH = slideHorizontal.value;
         
-        Debug.Log(valorV);
+        //Debug.Log(valorV);
 
 
         Vector3 horizontalOrigen = new Vector3(soporteCabezal.position.x, soporteCabezal.position.y, limiteSI.position.z);
