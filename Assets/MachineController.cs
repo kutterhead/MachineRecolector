@@ -8,6 +8,8 @@ public class MachineController : MonoBehaviour
     public Slider slideVertical;
     public Slider slideHorizontal;
 
+    public Slider slideBottonTop;
+
     public Transform limiteSI;
     public Transform limiteID;
 
@@ -21,24 +23,36 @@ public class MachineController : MonoBehaviour
     }
 
     // Update is called once per frame
+    Vector3 horizontalOrigen;
+    Vector3 horizontalObjetivo;
+    Vector3 posicionActual;
+    //Vector3 inicioCabezal;
     void Update()
     {
         //return;
         float valorV = slideVertical.value;
         float valorH = slideHorizontal.value;
-        
+        float top = slideBottonTop.value;
+
+
         //Debug.Log(valorV);
-
-
-        Vector3 horizontalOrigen = new Vector3(soporteCabezal.position.x, soporteCabezal.position.y, limiteSI.position.z);
-        Vector3 horizontalObjetivo = new Vector3(soporteCabezal.position.x, soporteCabezal.position.y, limiteID.position.z);
-
-        Vector3 posicionActual = Vector3.Lerp(horizontalOrigen, horizontalObjetivo, valorV);
-
-
-        Vector3 inicioCabezal = soporteCabezal.position;
+        //desplazaY
+        horizontalOrigen = new Vector3(soporteCabezal.position.x, limiteSI.position.y, soporteCabezal.position.z);
+        horizontalObjetivo = new Vector3(soporteCabezal.position.x, limiteID.position.y, soporteCabezal.position.z);
+        posicionActual = Vector3.Lerp(horizontalOrigen, horizontalObjetivo, top);
 
         soporteCabezal.position = posicionActual;
+
+        //desplaza z
+        horizontalOrigen = new Vector3(soporteCabezal.position.x, soporteCabezal.position.y, limiteSI.position.z);
+        horizontalObjetivo = new Vector3(soporteCabezal.position.x, soporteCabezal.position.y, limiteID.position.z);
+
+        posicionActual = Vector3.Lerp(horizontalOrigen, horizontalObjetivo, valorV);
+        soporteCabezal.position = posicionActual;
+
+
+       //desplaza x;
+
 
 
         horizontalOrigen = new Vector3(limiteSI.position.x, soporteCabezal.position.y, soporteCabezal.position.z);

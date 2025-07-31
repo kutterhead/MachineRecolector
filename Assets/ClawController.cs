@@ -6,17 +6,33 @@ using UnityEngine.UI;
 public class ClawController : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public Transform[] garra;
-    public Transform[] inicioCarrera;
-    public Transform[] finCarrera;
+
+    public GameObject[] garraRoot;
+    
+    
+    [SerializeField]Transform[] garra;
+
+
+    [SerializeField]Transform[] inicioCarrera;
+    [SerializeField]public Transform[] finCarrera;
     //Vector3 posInicial;
     public Slider slideClaw;
 
     public bool operaGarra = false;
     void Start()
     {
-       // posInicial[0] = garra[0].position;
+        // posInicial[0] = garra[0].position;
         //garra.eulerAngles = finCarrera.position;
+        System.Array.Resize(ref inicioCarrera, garraRoot.Length);
+        System.Array.Resize(ref finCarrera, garraRoot.Length);
+        System.Array.Resize(ref garra, garraRoot.Length);
+
+        for (int i = 0; i < garra.Length; i++)
+        {
+            inicioCarrera[i] = garraRoot[i].GetComponentInParent<FingerClaw>().inicioCarrera;
+            finCarrera[i] = garraRoot[i].GetComponentInParent<FingerClaw>().finCarrera;
+            garra[i] = garraRoot[i].GetComponentInParent<FingerClaw>().garra;
+        }
 
     }
 
