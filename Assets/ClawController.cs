@@ -20,7 +20,9 @@ public class ClawController : MonoBehaviour
     public Slider slideClaw;
 
     public bool operaGarra = false;
+    public bool garraAbiertaCerrada = false;
 
+    public Joint cabeza;
 
     void Start()
     {
@@ -36,7 +38,7 @@ public class ClawController : MonoBehaviour
             finCarrera[i] = garraRoot[i].GetComponentInParent<FingerClaw>().finCarrera;
             garra[i] = garraRoot[i].GetComponentInParent<FingerClaw>().garra;
         }
-       // StartCoroutine(cierraGarra());
+        StartCoroutine(abreGarra());
     }
 
     // Update is called once per frame
@@ -55,9 +57,14 @@ public class ClawController : MonoBehaviour
         }
         */
     }
+/*
+    public void cerrarGarra()
+    {
+        StartCoroutine(cierraGarra());
 
-
-    IEnumerator cierraGarra()
+    }
+*/
+    public IEnumerator cierraGarra()
     {
 
         float tiempo = 0.0f;
@@ -89,11 +96,17 @@ public class ClawController : MonoBehaviour
 
 
         }
+        garraAbiertaCerrada = true;
 
-        
+
 
     }
-    IEnumerator abreGarra()
+
+
+
+
+
+    public IEnumerator abreGarra()
     {
 
         float tiempo = 1f;
@@ -127,6 +140,7 @@ public class ClawController : MonoBehaviour
 
 
         }
+        garraAbiertaCerrada = false;
 
 
     }

@@ -9,10 +9,5 @@ public class FingerClaw : MonoBehaviour
     public Transform finCarrera;
 
 
-    void Start()
-    {
-        
-    }
-
 
 }

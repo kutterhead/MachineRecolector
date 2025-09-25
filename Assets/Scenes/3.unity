@@ -205,7 +205,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1088,6 +1088,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1410816913}
     m_Modifications:
+    - target: {fileID: 1317449667408453534, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2777640314193722831, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1128,9 +1132,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6924730494754536314, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7643266012204400844, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7693530356485184208, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
       propertyPath: m_Name
       value: FingerClawPrefab (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693530356485184208, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1915,7 +1931,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 729627424}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1690067929}
+        m_TargetAssemblyTypeName: MachineController, Assembly-CSharp
+        m_MethodName: bajarBrazo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &729627424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2377,8 +2405,9 @@ GameObject:
   - component: {fileID: 1006319747}
   - component: {fileID: 1006319746}
   - component: {fileID: 1006319749}
+  - component: {fileID: 1006319750}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: detector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2427,7 +2456,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1006319743}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -2485,6 +2514,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 783369629a5e6da4ebcec455239ca032, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  body: {fileID: 1006319750}
+  grippedObject: {fileID: 0}
+  clawController: {fileID: 1690067928}
+--- !u!54 &1006319750
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006319743}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1023898625
 GameObject:
   m_ObjectHideFlags: 0
@@ -2497,9 +2556,10 @@ GameObject:
   - component: {fileID: 1023898628}
   - component: {fileID: 1023898627}
   - component: {fileID: 1023898626}
-  m_Layer: 0
+  - component: {fileID: 1023898630}
+  m_Layer: 6
   m_Name: Cylinder (1)
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2521,7 +2581,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5000001
   m_Height: 2
@@ -2588,13 +2648,40 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1023898625}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8394165, y: 0.358, z: -8.111}
+  m_LocalRotation: {x: 0, y: 0, z: 0.000052732656, w: 1}
+  m_LocalPosition: {x: 0.03997769, y: 0.35784563, z: -6.9}
   m_LocalScale: {x: 0.26638, y: 0.26638, z: 0.26638}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1023898630
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1023898625}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1054233145
 GameObject:
   m_ObjectHideFlags: 0
@@ -3679,7 +3766,7 @@ Transform:
   m_GameObject: {fileID: 1410816912}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.9659258, z: 0, w: 0.2588191}
-  m_LocalPosition: {x: 0.129, y: -3.427, z: 0}
+  m_LocalPosition: {x: 0, y: -3.427, z: 0}
   m_LocalScale: {x: 0.82705, y: 0.82705, z: 0.82705}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3863,8 +3950,8 @@ Transform:
   m_GameObject: {fileID: 1424981681}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -79.14, y: -6, z: -5.73}
-  m_LocalScale: {x: 0.40529013, y: 0.40529013, z: 0.40529013}
+  m_LocalPosition: {x: -79.25, y: -6.48, z: -5.92}
+  m_LocalScale: {x: 0.25483426, y: 0.25483426, z: 0.25483426}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1690067930}
@@ -4194,7 +4281,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.5
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4242,6 +4329,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1410816913}
     m_Modifications:
+    - target: {fileID: 1317449667408453534, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2777640314193722831, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4282,9 +4373,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6924730494754536314, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7643266012204400844, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7693530356485184208, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
       propertyPath: m_Name
       value: FingerClawPrefab (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693530356485184208, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4531,7 +4634,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1690067927}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f92c23bb38e33a438b5d5a9d40f9916, type: 3}
   m_Name: 
@@ -4548,6 +4651,8 @@ MonoBehaviour:
   - {fileID: 0}
   slideClaw: {fileID: 1387698628}
   operaGarra: 1
+  garraAbiertaCerrada: 0
+  cabeza: {fileID: 0}
 --- !u!114 &1690067929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4567,6 +4672,7 @@ MonoBehaviour:
   limiteID: {fileID: 1424981682}
   soporteCabezal: {fileID: 1623447301}
   isGripping: 0
+  clawController: {fileID: 1690067928}
 --- !u!4 &1690067930
 Transform:
   m_ObjectHideFlags: 0
@@ -4619,8 +4725,8 @@ Transform:
   m_GameObject: {fileID: 1690085891}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -80.74, y: -7.962, z: -8.111}
-  m_LocalScale: {x: 0.40529013, y: 0.40529013, z: 0.40529013}
+  m_LocalPosition: {x: -80.623, y: -7.97, z: -7.856}
+  m_LocalScale: {x: 0.12228819, y: 0.12228819, z: 0.12228819}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1690067930}
@@ -4845,7 +4951,7 @@ GameObject:
   - component: {fileID: 2071453270}
   - component: {fileID: 2071453269}
   - component: {fileID: 2071453267}
-  - component: {fileID: 2071453268}
+  - component: {fileID: 2071453273}
   m_Layer: 0
   m_Name: Capsule (1)
   m_TagString: Untagged
@@ -4880,52 +4986,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 32
   m_CollisionDetection: 0
---- !u!144 &2071453268
-CharacterJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2071453266}
-  serializedVersion: 3
-  m_ConnectedBody: {fileID: 71710244}
-  m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 1.0000033, z: 0}
-  m_Axis: {x: 1, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
-  m_SwingAxis: {x: 0, y: 1, z: 0}
-  m_TwistLimitSpring:
-    spring: 0
-    damper: 0
-  m_LowTwistLimit:
-    limit: -20
-    bounciness: 0
-    contactDistance: 0
-  m_HighTwistLimit:
-    limit: 70
-    bounciness: 0
-    contactDistance: 0
-  m_SwingLimitSpring:
-    spring: 0
-    damper: 0
-  m_Swing1Limit:
-    limit: 40
-    bounciness: 0
-    contactDistance: 0
-  m_Swing2Limit:
-    limit: 40
-    bounciness: 0
-    contactDistance: 0
-  m_EnableProjection: 0
-  m_ProjectionDistance: 0.1
-  m_ProjectionAngle: 180
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!136 &2071453269
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -5017,6 +5077,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1623447301}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!144 &2071453273
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071453266}
+  serializedVersion: 3
+  m_ConnectedBody: {fileID: 71710244}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0.99999946, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_SwingAxis: {x: 0, y: 1, z: 0}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -20
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 70
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 40
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 40
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &2093912434
 GameObject:
   m_ObjectHideFlags: 0
@@ -5064,6 +5170,10 @@ PrefabInstance:
     - target: {fileID: 668917646740815435, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1317449667408453534, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2777640314193722831, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5113,9 +5223,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6924730494754536314, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7643266012204400844, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 7693530356485184208, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
       propertyPath: m_Name
       value: FingerClawPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 7693530356485184208, guid: 50100bb3f79d0e849b72278fa37fca1e, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
